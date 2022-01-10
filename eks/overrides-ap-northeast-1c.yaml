@@ -1,0 +1,26 @@
+isMultiAz: True
+
+AZ: ap-northeast-1c
+
+masterAddresses: "yb-master-0.yb-masters.yb-eks-ap-northeast-1a.svc.cluster.local:7100,yb-master-0.yb-masters.yb-eks-ap-northeast-1c.svc.cluster.local:7100,yb-master-0.yb-masters.yb-eks-ap-northeast-1d.svc.cluster.local:7100"
+
+storage:
+  master:
+    storageClass: "standard-ap-northeast-1c"
+  tserver:
+    storageClass: "standard-ap-northeast-1c"
+
+replicas:
+  master: 1
+  tserver: 1
+  totalMasters: 3
+
+gflags:
+  master:
+    placement_cloud: "aws"
+    placement_region: "ap-northeast-1"
+    placement_zone: "ap-northeast-1c"
+  tserver:
+    placement_cloud: "aws"
+    placement_region: "ap-northeast-1"
+    placement_zone: "ap-northeast-1c"

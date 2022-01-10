@@ -1,0 +1,16 @@
+version: "3"
+
+services:
+  aws-cli-container:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: yugabyte-eks
+    tty: true
+    volumes:
+      - ./eks:/workdir/eks
+    env_file:
+      - .env
+    environment:
+      AWS_DEFAULT_REGION: ap-northeast-1
+      AWS_DEFAULT_OUTPUT: json
