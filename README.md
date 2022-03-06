@@ -103,6 +103,16 @@ To connect and use the psql
 psql -h <external-ip> -U yugabyte -p 5433 yugabyte
 ```
 
+```
+kubectl exec -it -n yb-eks-ap-northeast-1a yb-master-0 -- bash \
+  -c "/home/yugabyte/master/bin/yb-admin --master_addresses yb-master-0.yb-masters.yb-eks-ap-northeast-1a.svc.cluster.local:7100,yb-master-0.yb-masters.yb-eks-ap-northeast-1c.svc.cluster.local:7100,yb-master-0.yb-masters.yb-eks-ap-northeast-1d.svc.cluster.local:7100 
+
+compact_table <keyspace> <table_name> [timeout_in_seconds] (default 20)
+```
+
+See:
+https://docs.yugabyte.com/latest/benchmark/tpcc-ysql/
+
 
 ## Delete EKS cluster
 
