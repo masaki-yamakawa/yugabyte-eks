@@ -9,13 +9,33 @@ MASTER_BROADCAST_ADDRESSES=${current host ip}
 TSERVER_BROADCAST_ADDRESSES=${current host ip}
 ```
 
+For local pc configuration(1 tserver node)
+```
+MASTER_ADDRESSES=yb-master-n1:7100
+MASTER_BROADCAST_ADDRESSES=yb-master-n1
+TSERVER_BROADCAST_ADDRESSES=yb-master-n1
+```
+
+For cluster configuration(1 master node & 3 tserver node)
+```
+# master node config
+MASTER_ADDRESSES=yb-master-n1:7100
+MASTER_BROADCAST_ADDRESSES=10.0.1.100
+TSERVER_BROADCAST_ADDRESSES=10.0.1.100
+
+# worker node config
+MASTER_ADDRESSES=10.0.1.100:7100
+MASTER_BROADCAST_ADDRESSES=10.0.1.110
+TSERVER_BROADCAST_ADDRESSES=10.0.1.110
+```
+
 
 ## Launch YugabyteDB
 
 First server, launch master & tserver node
 ```
 cat .env
-MASTER_ADDRESSES=yb-master-n1:7100:7100
+MASTER_ADDRESSES=yb-master-n1:7100
 MASTER_BROADCAST_ADDRESSES=10.0.1.100
 TSERVER_BROADCAST_ADDRESSES=10.0.1.100
 ```

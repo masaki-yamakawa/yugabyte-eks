@@ -32,6 +32,7 @@ services:
     command: [ "/home/yugabyte/bin/yb-tserver",
                 "--fs_data_dirs=/mnt/tserver",
                 "--start_pgsql_proxy",
+                "--ysql_max_connections=500",
                 "--rpc_bind_addresses=0.0.0.0:9100",
                 "--server_broadcast_addresses=${TSERVER_BROADCAST_ADDRESSES}",
                 "--use_private_ip=never",
