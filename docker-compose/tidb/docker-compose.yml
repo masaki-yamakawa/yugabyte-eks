@@ -26,6 +26,10 @@ services:
       - ./config/tikv.toml:/tikv.toml:ro
 #      - ./data:/data
       - ./logs:/logs
+    ulimits:
+      nofile:
+        soft: 82920
+        hard: 82920
     command:
       - --addr=0.0.0.0:20160
       - --advertise-addr=tikv:20160

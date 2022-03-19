@@ -1,0 +1,17 @@
+version: "3.7"
+
+services:
+  mysql:
+    image: mysql:8.0.27
+    container_name: mysql
+    hostname: mysql
+    ports:
+      - "3306:3306"
+#    network_mode: host
+#    volumes:
+#      - ./data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=tpcc
+      - MYSQL_USER=tpcc_user
+      - MYSQL_PASSWORD=user_tpcc
