@@ -1,0 +1,17 @@
+version: "3.7"
+
+services:
+  postgres:
+    image: postgres:14.1
+    container_name: postgres
+    hostname: postgres
+    ports:
+      - 5432:5432
+#    network_mode: host
+#    volumes:
+#      - ./data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=tpcc_user
+      - POSTGRES_PASSWORD=user_tpcc
+      - POSTGRES_DB=tpcc
+      - TZ="Asia/Tokyo"
