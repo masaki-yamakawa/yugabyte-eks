@@ -4,24 +4,27 @@ services:
   pd:
     image: pingcap/pd:v5.3.1
     ports:
-      - "2379"
+      - "2379:2379"
+      - "2380:2380"
     volumes:
       - ./config/pd.toml:/pd.toml:ro
 #      - ./data:/data
       - ./logs:/logs
     command:
-      - --name=pd
+      - --name=${PD_NAME}
       - --client-urls=http://0.0.0.0:2379
       - --peer-urls=http://0.0.0.0:2380
-      - --advertise-client-urls=http://pd:2379
-      - --advertise-peer-urls=http://pd:2380
-      - --initial-cluster=pd=http://pd:2380
+      - --advertise-client-urls=http://${PD_HOST}:2379
+      - --advertise-peer-urls=http://${PD_HOST}:2380
+      - --initial-cluster=${PD_INIT_CLUSTER}
       - --data-dir=/data/pd
       - --config=/pd.toml
       - --log-file=/logs/pd.log
 
   tikv:
     image: pingcap/tikv:v5.3.1
+    ports:
+      - "20160:20160"
     volumes:
       - ./config/tikv.toml:/tikv.toml:ro
 #      - ./data:/data
@@ -32,9 +35,9 @@ services:
         hard: 82920
     command:
       - --addr=0.0.0.0:20160
-      - --advertise-addr=tikv:20160
+      - --advertise-addr=${TIKV_HOST}:20160
       - --data-dir=/data/tikv
-      - --pd=pd:2379
+      - --pd=${PD_HOSTS}
       - --config=/tikv.toml
       - --log-file=/logs/tikv.log
     depends_on:
@@ -50,7 +53,7 @@ services:
       - ./logs:/logs
     command:
       - --store=tikv
-      - --path=pd:2379
+      - --path=${PD_HOSTS}
       - --config=/tidb.toml
       - --log-file=/logs/tidb.log
       - --advertise-address=tidb
