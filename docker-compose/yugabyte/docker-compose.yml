@@ -16,7 +16,7 @@ services:
                 "--rpc_bind_addresses=0.0.0.0:7100",
                 "--server_broadcast_addresses=${MASTER_BROADCAST_ADDRESSES}",
                 "--use_private_ip=never",
-                "--replication_factor=1"]
+                "--replication_factor=${REPLICATION_FACTOR}"]
     ports:
       - "7000:7000"
       - "7100:7100"
